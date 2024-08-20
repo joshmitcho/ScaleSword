@@ -1,0 +1,262 @@
+[gd_scene load_steps=15 format=3 uid="uid://b7fna3psl8m5q"]
+
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_pw0oi"]
+[ext_resource type="Texture2D" uid="uid://lgfwuo45c508" path="res://Art/upgrade_width (1).png" id="2_23u3w"]
+[ext_resource type="Texture2D" uid="uid://qga2coheynyl" path="res://Art/hp_bar.png" id="2_m4wci"]
+[ext_resource type="FontFile" uid="uid://cqs1jc8n3hqbn" path="res://Crayonara-Regular.ttf" id="3_ltfka"]
+[ext_resource type="Texture2D" uid="uid://cp12xqgt3uv6i" path="res://Art/upgrade_width (2).png" id="3_s74cp"]
+[ext_resource type="Texture2D" uid="uid://n2ymgwbm1mky" path="res://Art/upgrade_length (1).png" id="4_f6gon"]
+[ext_resource type="Texture2D" uid="uid://dug0kxlcptsbu" path="res://Art/title.png" id="4_fv8m0"]
+[ext_resource type="Texture2D" uid="uid://ck27x4h8j6105" path="res://Art/upgrade_length (2).png" id="5_tuyxr"]
+[ext_resource type="Texture2D" uid="uid://dih47i62hvh73" path="res://Art/upgrade_hp (1).png" id="6_0gse0"]
+[ext_resource type="Texture2D" uid="uid://dsgdp5s7iiwvm" path="res://Art/upgrade_length (3).png" id="6_rj6gk"]
+[ext_resource type="Texture2D" uid="uid://bccj83hbfiwd" path="res://Art/upgrade_hp (2).png" id="7_nos5e"]
+[ext_resource type="Texture2D" uid="uid://cr2rey2iy5exr" path="res://Art/upgrade_width (3).png" id="9_1rv58"]
+[ext_resource type="Texture2D" uid="uid://bwcjfw62iked8" path="res://Art/upgrade_hp (3).png" id="10_8frvq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sg0h1"]
+bg_color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="UI" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pw0oi")
+
+[node name="HPLabel" type="Label" parent="."]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 1
+offset_left = 61.0
+offset_top = 41.0
+offset_right = 120.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 36
+text = "HP:"
+
+[node name="CurrentRoundLabel" type="Label" parent="."]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -185.0
+offset_top = 41.0
+offset_right = -49.0
+offset_bottom = 91.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 36
+text = "Round 1"
+
+[node name="XPLabel" type="Label" parent="."]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 1
+offset_left = 61.0
+offset_top = 80.0
+offset_right = 120.0
+offset_bottom = 130.0
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 36
+text = "XP: 0"
+
+[node name="HPBar" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = 119.0
+offset_top = 56.0
+offset_right = 419.0
+offset_bottom = 74.0
+color = Color(1, 0, 0, 1)
+
+[node name="HPBarOutline" type="NinePatchRect" parent="."]
+layout_mode = 1
+offset_left = 115.0
+offset_top = 51.0
+offset_right = 424.0
+offset_bottom = 83.0
+texture = ExtResource("2_m4wci")
+patch_margin_left = 7
+patch_margin_right = 8
+
+[node name="GameOverMenu" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu"]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverMenu/VBoxContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 96
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RoundsLabel" type="Label" parent="GameOverMenu/VBoxContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 64
+text = "Rounds Complete: 99"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 64
+text = "  Restart  "
+
+[node name="PauseMenu" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 90
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 2
+
+[node name="PauseLabel" type="Label" parent="PauseMenu/VBoxContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 96
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="PauseInstructions" type="Label" parent="PauseMenu/VBoxContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 64
+text = "Press P to Unpause"
+horizontal_alignment = 1
+
+[node name="TitleScreen" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen"]
+layout_mode = 2
+
+[node name="Title" type="TextureRect" parent="TitleScreen/VBoxContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+texture = ExtResource("4_fv8m0")
+
+[node name="StartButton" type="Button" parent="TitleScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 64
+text = "  Start  "
+
+[node name="LevelCompleteMenu" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelCompleteMenu"]
+layout_mode = 2
+
+[node name="LevelCompleteLabel" type="Label" parent="LevelCompleteMenu/VBoxContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 96
+text = "ROUND COMPLETE"
+horizontal_alignment = 1
+
+[node name="UpgradeContainer" type="GridContainer" parent="LevelCompleteMenu/VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="LengthUpgrade" type="TextureButton" parent="LevelCompleteMenu/VBoxContainer/UpgradeContainer"]
+layout_mode = 2
+tooltip_text = "Upgrade Sword Length"
+texture_normal = ExtResource("4_f6gon")
+texture_hover = ExtResource("5_tuyxr")
+texture_disabled = ExtResource("6_rj6gk")
+
+[node name="WidthUpgrade" type="TextureButton" parent="LevelCompleteMenu/VBoxContainer/UpgradeContainer"]
+layout_mode = 2
+tooltip_text = "Upgrade Sword Width"
+texture_normal = ExtResource("2_23u3w")
+texture_hover = ExtResource("3_s74cp")
+texture_disabled = ExtResource("9_1rv58")
+
+[node name="HPUpgrade" type="TextureButton" parent="LevelCompleteMenu/VBoxContainer/UpgradeContainer"]
+layout_mode = 2
+tooltip_text = "Upgrade HP"
+texture_normal = ExtResource("6_0gse0")
+texture_hover = ExtResource("7_nos5e")
+texture_disabled = ExtResource("10_8frvq")
+
+[node name="LengthCost" type="Label" parent="LevelCompleteMenu/VBoxContainer/UpgradeContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 36
+text = "100 XP"
+horizontal_alignment = 1
+
+[node name="WidthCost" type="Label" parent="LevelCompleteMenu/VBoxContainer/UpgradeContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 36
+text = "100 XP"
+horizontal_alignment = 1
+
+[node name="HPCost" type="Label" parent="LevelCompleteMenu/VBoxContainer/UpgradeContainer"]
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 36
+text = "100 XP"
+horizontal_alignment = 1
+
+[node name="NextLevelButton" type="Button" parent="LevelCompleteMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_ltfka")
+theme_override_font_sizes/font_size = 72
+theme_override_styles/normal = SubResource("StyleBoxFlat_sg0h1")
+text = "  Next Level  "
+icon_alignment = 1
+
+[connection signal="pressed" from="GameOverMenu/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="TitleScreen/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="LevelCompleteMenu/VBoxContainer/UpgradeContainer/LengthUpgrade" to="." method="_on_sword_upgrade_pressed"]
+[connection signal="pressed" from="LevelCompleteMenu/VBoxContainer/UpgradeContainer/WidthUpgrade" to="." method="_on_width_upgrade_pressed"]
+[connection signal="pressed" from="LevelCompleteMenu/VBoxContainer/UpgradeContainer/HPUpgrade" to="." method="_on_hp_upgrade_pressed"]
+[connection signal="pressed" from="LevelCompleteMenu/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]

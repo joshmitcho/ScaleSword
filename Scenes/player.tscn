@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqebp5bk6wxxb"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_bqyd8"]
+[ext_resource type="Texture2D" uid="uid://creim5mrnk77i" path="res://Art/characters.png" id="2_33wxk"]
+[ext_resource type="Script" path="res://Scripts/sword.gd" id="3_ee4vm"]
+[ext_resource type="Texture2D" uid="uid://2c71jp6icd32" path="res://Art/weapon_longsword.png" id="4_gm4xj"]
+[ext_resource type="Texture2D" uid="uid://cusuh2dhudmqw" path="res://Art/purple_hand.png" id="5_3to04"]
+[ext_resource type="FontFile" uid="uid://cqs1jc8n3hqbn" path="res://Crayonara-Regular.ttf" id="5_8828e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ouw4i"]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mj78k"]
+size = Vector2(20, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xevat"]
+radius = 28.0
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 5
+collision_mask = 255
+script = ExtResource("1_bqyd8")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_33wxk")
+hframes = 2
+vframes = 2
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ouw4i")
+
+[node name="Sword" type="RigidBody2D" parent="."]
+position = Vector2(0, 164)
+collision_layer = 2
+collision_mask = 254
+mass = 10.0
+gravity_scale = 0.0
+center_of_mass_mode = 1
+can_sleep = false
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("3_ee4vm")
+
+[node name="SwordSprite" type="NinePatchRect" parent="Sword"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = -139.0
+offset_right = 32.0
+offset_bottom = -75.0
+grow_horizontal = 2
+pivot_offset = Vector2(32, 64)
+texture = ExtResource("4_gm4xj")
+patch_margin_left = 32
+patch_margin_top = 26
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="HitBox" type="CollisionShape2D" parent="Sword"]
+position = Vector2(0, -104)
+shape = SubResource("RectangleShape2D_mj78k")
+
+[node name="HandSprite" type="Sprite2D" parent="Sword"]
+position = Vector2(0, -130)
+texture = ExtResource("5_3to04")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("../Sword")
+bias = 0.9
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_xevat")
+
+[node name="DamageLabel" type="Label" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_8828e")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+
+[node name="XPLabel" type="Label" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+modulate = Color(0, 1, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_8828e")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7jh842i6e8jd"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_tfa1a"]
+[ext_resource type="Texture2D" uid="uid://creim5mrnk77i" path="res://Art/characters.png" id="2_4jhyn"]
+[ext_resource type="Texture2D" uid="uid://qga2coheynyl" path="res://Art/hp_bar.png" id="3_mvetb"]
+[ext_resource type="FontFile" uid="uid://cqs1jc8n3hqbn" path="res://Crayonara-Regular.ttf" id="3_t4no4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ejdr"]
+radius = 24.0
+
+[node name="Enemy" type="RigidBody2D"]
+z_index = 5
+collision_layer = 8
+collision_mask = 14
+mass = 10.0
+gravity_scale = 0.0
+max_contacts_reported = 5
+contact_monitor = true
+linear_damp = 8.0
+angular_damp = 25.0
+script = ExtResource("1_tfa1a")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_4jhyn")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1ejdr")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="HPBar" type="ColorRect" parent="Node2D"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(40, 40)
+color = Color(1, 0, 0, 1)
+
+[node name="DamageLabel" type="Label" parent="Node2D"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_t4no4")
+theme_override_font_sizes/font_size = 24
+text = "100"
+horizontal_alignment = 1
+
+[node name="HPBarOutline" type="NinePatchRect" parent="Node2D"]
+offset_left = -44.0
+offset_top = -42.0
+offset_right = 44.0
+offset_bottom = -26.0
+texture = ExtResource("3_mvetb")
+patch_margin_left = 7
+patch_margin_right = 8
